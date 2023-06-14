@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Liquidity</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        .navbar {
+            margin-top: 50px;
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+        .navbar ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        .navbar li {
+            margin-right: 10px;
+        }
+        .navbar li a {
+            color: white;
+            text-decoration: none;
+            padding: 5px;
+        }
+        .top-right {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin: 10px;
+        }
+        .top-right .login-logo {
+            margin-right: 10px;
+        }
+        /* Replace the existing search-bar styles with the following */
+        .search-bar {
+            position: relative;
+            top: 20px;
+            left: 30px;
+            transform: translate(-50%, -50%);
+            transition: all 1s;
+            width: 50px;
+            height: 50px;
+            background: white;
+            box-sizing: border-box;
+            border-radius: 25px;
+            border: 4px solid #ffffff;
+            padding: 5px;
+        }
+
+        .search-bar input[type="text"] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 43px;
+            line-height: 30px;
+            outline: 0;
+            border: 0;
+            display: none;
+            font-size: 1em;
+            border-radius: 20px;
+            padding: 0 20px;
+        }
+
+        .search-bar .fa {
+            box-sizing: border-box;
+            padding: 10px;
+            width: 42.5px;
+            height: 42.5px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            border-radius: 50%;
+            color: #07051a;
+            text-align: center;
+            font-size: 1.2em;
+            transition: all 1s;
+        }
+
+        .search-bar:hover,
+        .search-bar.valid {
+            width: 200px;
+            cursor: pointer;
+        }
+
+        .search-bar:hover input,
+        .search-bar.valid input {
+            display: block;
+        }
+
+        .search-bar:hover .fa,
+        .search-bar.valid .fa {
+            background: #07051a;
+            color: white;
+        }
+        /* End of new search-bar styles */
+
+        .chart-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            margin-top: calc(100vh - 1250px);
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: calc(100vh - 450px);
+        }
+        .logo {
+            text-align: center;
+            margin-top: 20px;
+            font-family: IEX Standard, Arial, sans-serif;
+        }
+        .title {
+            text-align: center;
+            margin-top: 20px;
+        }
+        #myChart {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .title {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .logo {
+            text-align: center;
+            margin-top: 20px;
+            font-family: IEX Standard, Arial, sans-serif;
+        }
+        .title h1 {
+            font-family: "Helvetica", sans-serif; /* Replace with your desired font family */
+            font-size: 50px; /* Adjust the font size as needed */
+            font-weight: lighter; /* Adjust the font weight as needed */
+            color: white; /* Adjust the font color as needed */
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const clearInput = () => {
+          const input = document.querySelector(".search-bar input[type='text']");
+          input.value = "";
+        };
+
+        const clearBtn = document.getElementById("clear-btn");
+        clearBtn.addEventListener("click", clearInput);
+    </script>
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">About</a></li>
+        </ul>
+    </nav>
+    <div class="top-right">
+        <div class="login-logo">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Login Logo" width="50">
+        </div>
+
+        <div class="search-bar">
+            <input type="text" placeholder="Search">
+            <i class="fa fa-search"></i>
+            <a href="javascript:void(0)" id="clear-btn"></a>
+        </div>
+    </div>
+    <div class="content">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" width="100">
+        </div>
+        <div class="title">
+            <h1>Liquidity</h1>
+        </div>
+    </div>
+        <div class="chart-container">
+            <canvas id="myChart"></canvas>
+        </div>
+
+
+    <script>
+               // Function to generate random data
+        const generateRandomData = () => {
+            const data = [];
+            for (let i = 0; i < 6; i++) {
+                data.push(Math.floor(Math.random() * 10) + 1);
+            }
+            return data;
+        };
+
+        // Create initial chart
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const chartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    display: false
+                },
+                x: {
+                    display: false
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            elements: {
+                point: {
+                    radius: 0
+                }
+            }
+        };
+        const chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+                datasets: [{
+                    label: 'My Dataset',
+                    data: generateRandomData(),
+                    borderColor: 'white',
+                    backgroundColor: 'rgba(0, 0, 0, 0)',
+                    borderWidth: 7
+                }]
+            },
+            options: chartOptions
+        });
+
+        // Function to update the chart with new data
+        const updateChart = () => {
+            chart.data.datasets[0].data = generateRandomData();
+            chart.update();
+        };
+
+        // Update the chart every second
+        setInterval(updateChart, 3000);
+    </script>
+</body>
+</html>

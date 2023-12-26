@@ -22,6 +22,6 @@ A web application project created with HTML, CSS, and Flask. This project emulat
 ![image](https://github.com/someman112/stockapp/assets/112663576/709d3972-d35c-44c7-ad93-1a0b05962113)
 ##
 ![image](https://github.com/someman112/stockapp/assets/112663576/8e89d21f-9f13-49f7-85c2-09fba9bc0663)
-##
+## Demo Video
 https://github.com/someman112/stockapp/assets/112663576/0af17596-2fa8-49dd-98f0-5ff19c296611
 

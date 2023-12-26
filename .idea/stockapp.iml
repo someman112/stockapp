@@ -11,10 +11,12 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="jquery-3.6.0" level="application" />
     <orderEntry type="library" name="all" level="application" />
-    <orderEntry type="library" name="all" level="application" />
+    <orderEntry type="library" name="90534d4e94" level="application" />
     <orderEntry type="library" name="chart.js" level="application" />
     <orderEntry type="library" name="chartjs-plugin-gradient" level="application" />
+    <orderEntry type="library" name="font-awesome" level="application" />
     <orderEntry type="library" name="chartjs-plugin-annotation" level="application" />
+    <orderEntry type="library" name="chart.js" level="application" />
   </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_CONFIGURATION" value="Jinja2" />

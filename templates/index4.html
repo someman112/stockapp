@@ -3,6 +3,7 @@
 <head>
   <title>Live Chart</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 </head>
 <body>
   <canvas id="liveChart"></canvas>
@@ -41,7 +42,10 @@
           responsive: true,
           scales: {
             x: {
-              display: true
+              display: true,
+              grid: {
+                display: false
+              }
             },
             y: {
               display: true,
@@ -66,8 +70,8 @@
           },
           plugins: {
             tooltip: {
-              enabled: true  // Disable default tooltip display
-            }
+              enabled: true
+            },
           }
         }
       });

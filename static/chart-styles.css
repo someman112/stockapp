@@ -1,0 +1,272 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align items to the top left */
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background: #000000;
+}
+
+canvas {
+  width: 80%;
+  height: 400px;
+  background: linear-gradient(rgb(0, 0, 0), rgb(0, 0, 0));
+  border: 4px solid rgb(0, 0, 0);
+}
+
+input[type="text"] {
+  font-family: 'Lato', sans-serif;
+  position: absolute; /* Position the search bar */
+  top: 9.4px; /* Distance from the top */
+  right: 120px; /* Distance from the right */
+  margin-top: 10px;
+  padding: 10px;
+  border: none;
+  background-color: #ffffff;
+  color: #000000;
+  font-size: 16px;
+  font-weight: bold;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.13);
+  outline: none;
+  width: 200px;
+}
+
+#search-button {
+  margin-top: -10px;
+  padding: 10px 20px;
+  position: absolute;
+  top: 29.4px;
+  right: 55px;
+  background-color: #ffffff;
+  color: #000;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  /*border-radius: 20px;*/
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  outline: none;
+  transition: ease-in-out 0.1ms;
+
+}
+
+#search-button i {
+  margin-right: 5px;
+}
+
+#search-button span {
+  display: none;
+}
+
+#search-button.active {
+  /* Apply styles when the button is active */
+  animation: breathing 0.5s ease-in-out; /* Breathing animation */
+}
+
+@keyframes breathing {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.ring-container {
+    position: relative;
+}
+
+.circle {
+    width: 15px;
+    height: 15px;
+    background-color: #62bd19;
+    border-radius: 50%;
+    position: absolute;
+    top: -630px;
+    left: 8px;
+}
+
+.ringring {
+    border: 3px solid #62bd19;
+    -webkit-border-radius: 30px;
+    height: 25px;
+    width: 25px;
+    position: absolute;
+    left: 0;
+    top: -638px;
+    -webkit-animation: pulsate 1s ease-out;
+    -webkit-animation-iteration-count: infinite;
+    opacity: 0.0
+}
+@-webkit-keyframes pulsate {
+    0% {-webkit-transform: scale(0.1, 0.1); opacity: 0.0;}
+    50% {opacity: 1.0;}
+    100% {-webkit-transform: scale(1.2, 1.2); opacity: 0.0;}
+}
+
+#symbol-value,
+#data-value {
+    margin-top: 50px;
+    color: #ffffff;
+    font-family: 'Lato', sans-serif;
+}
+
+#symbol-value {
+    margin-top: 50px;
+    margin-left: 20px;
+    margin-right: 10px;
+}
+
+#sym-chng,
+#sym-chng-pt{
+    margin-top: -19px;
+    margin-bottom: 30px;
+    color: white;
+    font-family: 'Lato', sans-serif;
+}
+
+#sym-chng-pt{
+    margin-right: 10px;
+}
+#symbol-img{
+    margin-top: 30px;
+    border-radius: 30px;
+}
+
+@keyframes blink_green {
+  0% {
+    color: white;
+  }
+  50% {
+    color: #2fff40;
+  }
+  100% {
+    color: white;
+  }
+}
+
+@keyframes blink_red {
+  0% {
+    color: white;
+  }
+  50% {
+    color: #fc3c3c;
+  }
+  100% {
+    color: white;
+  }
+}
+
+.blink-green {
+  animation: blink_green 1s;
+}
+
+.blink-red {
+  animation: blink_red 1s;
+}
+
+.values-container {
+    display: flex;
+    align-items: center;
+}
+
+.intraday-container{
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    font-size: xx-small;
+}
+#wrap {
+  height: 100%;
+}
+
+.btn_wrap {
+    margin-top: -30px;
+  font-family: 'Lato', sans-serif;
+  height: 100%;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+a {
+  display: block;
+  margin: 10px;
+  padding: 15px;
+  width: 130px;
+  font-weight: bold;
+  color: #FFF;
+  text-align: center;
+  text-decoration: none;
+  position: relative;
+  transition: .2s ease-in-out;
+}
+
+a:active {
+  background: rgba(255, 255, 255, .5);
+}
+
+.lazer:before {
+  content: "";
+  width: 100%;
+  height: 3px;
+  background: #FFF;
+  position: absolute;
+  top: -1px;
+  right: 0;
+  transition: .1s ease-in-out .1s;
+}
+
+.lazer:after {
+  content: "";
+  width: 3px;
+  height: 100%;
+  background: #FFF;
+  position: absolute;
+  bottom: 0;
+  right: -1px;
+  transition: .1s ease-in-out .2s;
+}
+
+#sell span:before {
+  background: #fc3c3c;
+}
+
+.lazer span:before {
+  content: "";
+  width: 100%;
+  height: 1px;
+  background: #2fff40;
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  transition: .1s ease-in-out .3s;
+}
+
+.lazer span:after {
+  content: "";
+  width: 3px;
+  height: 100%;
+  background: #FFF;
+  position: absolute;
+  top: 0;
+  left: -1px;
+  transition: .1s ease-in-out;
+}
+
+.lazer:hover span:after {
+  height: 0;
+}
+
+.lazer:hover:before {
+  width: 0;
+}
+
+.lazer:hover:after {
+  height: 0;
+}
+
+.lazer:hover span:before {
+  height: 5px;
+}

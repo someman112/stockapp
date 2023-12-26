@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Live Chart</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" type="text/scss" href="../../static/button.css">
+  <link rel="stylesheet" type="text/css" href="../../static/chart-styles.css">
+
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap">
+
+<script src="https://kit.fontawesome.com/90534d4e94.js" crossorigin="anonymous"></script></head>
+<body>
+  <canvas id="liveChart"></canvas>
+
+  <label for="messageInput"></label><input type="text" id="messageInput" placeholder="Enter a Symbol..." value="{{ search_query }}">
+  <button id="search-button" onclick="toggleSearch(); sendMessage()"><i class="fa-solid fa-magnifying-glass"></i></button>
+
+  <script src="../../static/chart-script.js"></script>
+  <script>
+    window.onload = function() {
+      search();
+    };
+    function toggleSearch() {
+        const button = document.querySelector('button');
+        button.classList.add('active');
+
+      setTimeout(function() {
+        button.classList.remove('active');
+      }, 1000);
+    }
+  </script>
+    <div class="ring-container">
+        <div class="ringring"></div>
+        <div class="circle" title="Market Open"></div>
+    </div>
+  <div class="values-container">
+    <img id="symbol-img" src="" alt="sym-img">
+    <h1 id="symbol-value"></h1>
+    <h1 id="data-value"></h1>
+  </div>
+
+  <div class="intraday-container">
+      <h1 id="sym-chng-pt"></h1>
+      <h1 id="sym-chng"></h1>
+  </div>
+
+<div id="wrap">
+  <div class="btn_wrap">
+    <a class="lazer buy-button"><span>Buy</span></a>
+    <a id="sell" class="lazer sell-button"><span>Sell</span></a>
+  </div>
+</div>
+
+</body>
+</html>
